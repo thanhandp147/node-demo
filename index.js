@@ -2,7 +2,7 @@ const express= require('express')
 const server= express();
 const bodyParser= require('body-parser');
 const mongoose= require('mongoose');
-const PORT= 3000;
+const PORT= process.env.PORT || 3000;
 const expressSession= require('express-session');
 /**
  * Import Internal
@@ -28,13 +28,13 @@ server.use(expressSession({
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json({}));
 
-const { USER_ROUTER }= require('./controllers/user.router');
-server.use('/', USER_ROUTER);
-const { POST_ROUTER }= require('./controllers/post.route');
-server.use('/post', POST_ROUTER );
+// const { USER_ROUTER }= require('./controllers/user.router');
+// server.use('/', USER_ROUTER);
+// const { POST_ROUTER }= require('./controllers/post.route');
+// server.use('/post', POST_ROUTER );
 
 /**Set default Route */
-server.get('/', (req, res) => res.json({ message: 'Hello Word!' }))
+server.get('/', (req, res) => res.send('Hello'))
 server.get('*', (req, res) => res.json({ error: 'Not Found!' }))
 
 /**Connect MongoDB & Start Server */
